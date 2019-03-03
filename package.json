@@ -1,0 +1,23 @@
+{
+  "name": "bamazon",
+  "version": "1.0.0",
+  "description": "CLI Store ",
+  "main": "bamazonCustomer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ss100yan/Bamazon.git"
+  },
+  "author": "Stoyan Shivarov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ss100yan/Bamazon/issues"
+  },
+  "homepage": "https://github.com/ss100yan/Bamazon#readme",
+  "dependencies": {
+    "inquirer": "^6.2.2",
+    "mysql": "^2.16.0"
+  }
+}
