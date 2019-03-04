@@ -51,15 +51,21 @@ var con = mysql.createConnection({
 
                console.log('\nOrder receipt:');
                console.log(JSON.stringify(answers, null, '  '));
+                 //....avelabiliti check function.....
 
 
-
+                 //........Update Function
+                 var ItemID = answers.ID
+                 var ItemQuantity = answers.Quantity;
+                 var UpdatedItemQuantity;
+                 console.log(ItemID);
+                 console.log(ItemQuantity);
                 //MYSQL update..............................................
-        var sql = "UPDATE products SET stock_quantity = '2' WHERE product_name = 'F1'";
+        var sql = "UPDATE products SET stock_quantity ="+ ItemQuantity + " WHERE id ="+ ItemID;
         con.query(sql, function (err, result) {
           if (err) throw err;
           console.log(result.affectedRows + " record(s) updated");
-          
+
         });
 
         });
