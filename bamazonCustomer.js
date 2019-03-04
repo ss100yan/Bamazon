@@ -43,18 +43,29 @@ var con = mysql.createConnection({
         if (err) throw err;
         console.log(result);
 
-              inquirer
-        .prompt(questions)
+      
+        // Inquirer..................................................
+              inquirer.prompt(questions)
         .then(answers => {
           // Use user feedback for... whatever!! 
 
                console.log('\nOrder receipt:');
                console.log(JSON.stringify(answers, null, '  '));
+
+
+
+                //MYSQL update..............................................
+        var sql = "UPDATE products SET stock_quantity = '2' WHERE product_name = 'F1'";
+        con.query(sql, function (err, result) {
+          if (err) throw err;
+          console.log(result.affectedRows + " record(s) updated");
+          
         });
 
+        });
+  
+              
         
-
        
       });
   });
- 
