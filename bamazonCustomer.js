@@ -39,7 +39,7 @@ var con = mysql.createConnection({
   con.connect(function(err) {
     if (err) throw err;
     console.log("Connected!");
-    con.query("SELECT * FROM products", function (err, result, fields) {
+    con.query("SELECT * FROM products ", function (err, result, fields) {
         if (err) throw err;
         console.log(result);
 
@@ -51,22 +51,32 @@ var con = mysql.createConnection({
 
                console.log('\nOrder receipt:');
                console.log(JSON.stringify(answers, null, '  '));
-                 //....avelabiliti check function.....
+                
 
 
                  //........Update Function
                  var ItemID = answers.ID
                  var ItemQuantity = answers.Quantity;
-                 var UpdatedItemQuantity;
+                 var curenQuantity = result[ItemID-1].stock_quantity;
+                 var UpdatedItemQuantity = curenQuantity -ItemQuantity;
+                 //....avelabiliti check function.....
+                 
                  console.log(ItemID);
                  console.log(ItemQuantity);
+                 console.log(`We have only ${curenQuantity} in stock`);
+                 console.log(UpdatedItemQuantity);
+                 if (ItemQuantity<=curenQuantity){
                 //MYSQL update..............................................
-        var sql = "UPDATE products SET stock_quantity ="+ ItemQuantity + " WHERE id ="+ ItemID;
+
+        var sql = `UPDATE products SET stock_quantity =${UpdatedItemQuantity} WHERE id =${ItemID}`;
         con.query(sql, function (err, result) {
           if (err) throw err;
           console.log(result.affectedRows + " record(s) updated");
+        
 
         });
+        
+        };
 
         });
   
