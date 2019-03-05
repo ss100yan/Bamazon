@@ -1,21 +1,21 @@
 # Bamazon
 
-##Overview
+## Overview
 Amazon-like storefront
 
-##Gettting Started:
+## Gettting Started:
 
 Run in terminal $ node bamazon.js
 
-###Technologies:
+### Technologies:
 
-*Javascript
-*MySQL
-*Node.js
+* Javascript
+* MySQL
+* Node.js
 
 Node packages:
 
-*Mysql
-*Inquirer
+* Mysql
+* Inquirer
 
 Creator: Stoyan Shivarov
