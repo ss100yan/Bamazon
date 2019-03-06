@@ -49,11 +49,7 @@ var con = mysql.createConnection({
         .then(answers => {
           // Use user feedback for... whatever!! 
 
-               console.log('\nOrder receipt:');
-               console.log(JSON.stringify(answers, null, '  '));
-                
-
-
+   
                  //........Update Function
                  var ItemID = answers.ID
                  var ItemQuantity = answers.Quantity;
@@ -61,10 +57,10 @@ var con = mysql.createConnection({
                  var UpdatedItemQuantity = curenQuantity -ItemQuantity;
                  //....avelabiliti check function.....
                  
-                 console.log(ItemID);
-                 console.log(ItemQuantity);
+                
                  console.log(`We have only ${curenQuantity} in stock`);
-                 console.log(UpdatedItemQuantity);
+                
+                 
                  if (ItemQuantity<=curenQuantity){
                 //MYSQL update..............................................
 
@@ -72,7 +68,9 @@ var con = mysql.createConnection({
         con.query(sql, function (err, result) {
           if (err) throw err;
           console.log(result.affectedRows + " record(s) updated");
-        
+
+          console.log('\nOrder receipt:');
+          console.log(JSON.stringify(answers, null, '  '));
 
         });
         
