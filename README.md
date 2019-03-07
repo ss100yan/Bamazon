@@ -1,7 +1,8 @@
 # Bamazon
 
 ## Overview
-Amazon-like storefront
+Amazon-like storefront.
+Video of the functionlity of the app is provided in the the GIF folder.
 
 ## Gettting Started:
 
