@@ -1,6 +1,9 @@
+//.............Importing mysql and inquirer modules ..........................................
 
 var mysql = require('mysql');
 var inquirer = require('inquirer');
+
+//..............Creating Varible for inquirer to prompt order questions to the customer......................
 
 var questions = [
     {
@@ -27,7 +30,7 @@ var questions = [
 
 ];
 
-
+//................Creating a connection to the database.......................
 
 var con = mysql.createConnection({
     host: "localhost",
@@ -41,6 +44,8 @@ var con = mysql.createConnection({
     // console.log("Connected!");
         con.query("SELECT * FROM products ", function (err, result, fields) {
         if (err) throw err;
+
+//.......Displaying the Bamazon products, ID's and prices.........................
 
         console.log('Bamazon.com Inventory: ');
         console.log('...................\n');
@@ -59,25 +64,24 @@ var con = mysql.createConnection({
         // console.log(result);
 
       
-        // Inquirer..................................................
+        // Inquirer prompts order questions to the customer......................................
               inquirer.prompt(questions)
         .then(answers => {
-          // Use user feedback for... whatever!! 
+         
 
-   
-                 //........Update Function
+  
+         //........Database update ...............................
+
                  var ItemID = answers.ID
                  var ItemQuantity = answers.Quantity;
                  var curenQuantity = result[ItemID-1].stock_quantity;
                  var UpdatedItemQuantity = curenQuantity -ItemQuantity;
-                 //....avelabiliti check function.....
+
+        //....availability check .......................................
                  
-                
-                //  console.log(`We have only ${curenQuantity} in stock`);
-                
                  
                  if (ItemQuantity<=curenQuantity){
-                //MYSQL update..............................................
+      //.................MYSQL update..............................................
 
         var sql = `UPDATE products SET stock_quantity =${UpdatedItemQuantity} WHERE id =${ItemID}`;
         con.query(sql, function (err, result) {
@@ -97,7 +101,12 @@ var con = mysql.createConnection({
                console.log('\n.....................................');
                console.log("Thank you for shopping with Bamazon !!!");
                console.log("Questions abou your purchase: 1-800-Bamazon or www.Bamazon.com/support");
-        };
+        }
+          else{
+            console.log('\n.....................................');
+            console.log(`We have only ${curenQuantity} in stock`);
+            console.log('We apologize about the inconvenience!');
+          };
 
         });
   
