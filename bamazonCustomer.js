@@ -6,7 +6,7 @@ var questions = [
     {
         type: 'input',
         name: 'ID',
-        message: "Please enter the ID of the product they would like to buy !",
+        message: "Please enter the ID of the product you would like to buy !",
         validate: function(value) {
             var valid = !isNaN(parseFloat(value));
             return valid || 'Please enter a number';
@@ -16,7 +16,7 @@ var questions = [
       {
         type: 'input',
         name:'Quantity' ,
-        message: "How many units of the product they would like to buy?",
+        message: "How many units of the product would you like to buy?",
         vvalidate: function(value) {
             var valid = !isNaN(parseFloat(value));
             return valid || 'Please enter a number';
@@ -39,9 +39,24 @@ var con = mysql.createConnection({
   con.connect(function(err) {
     if (err) throw err;
     console.log("Connected!");
-    con.query("SELECT * FROM products ", function (err, result, fields) {
+        con.query("SELECT * FROM products ", function (err, result, fields) {
         if (err) throw err;
-        console.log(result);
+
+        console.log('Bamazon Inventory: ');
+        console.log('...................\n');
+    
+        var Inventory = '';
+        for (var i = 0; i < result.length; i++) {
+          Inventory = '';
+          Inventory += 'Product ID: ' + result[i].id + '  //  ';
+          Inventory += 'Product Name: ' + result[i].product_name + '  //  ';
+          Inventory += 'Price: $' + result[i].price + '\n';
+    
+          console.log(Inventory);
+        }
+    
+          console.log("---------------------------------------------------------------------\n");
+        // console.log(result);
 
       
         // Inquirer..................................................
@@ -67,11 +82,11 @@ var con = mysql.createConnection({
         var sql = `UPDATE products SET stock_quantity =${UpdatedItemQuantity} WHERE id =${ItemID}`;
         con.query(sql, function (err, result) {
           if (err) throw err;
-          console.log(result.affectedRows + " record(s) updated");
+          // console.log(result.affectedRows + " record(s) updated");
 
           console.log('\nOrder receipt:');
           console.log(JSON.stringify(answers, null, '  '));
-
+          console.log("Thank you for shopping with Bamazon !!!");
         });
         
         };

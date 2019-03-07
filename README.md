@@ -5,7 +5,7 @@ Amazon-like storefront
 
 ## Gettting Started:
 
-Run in terminal  node bamazon.js
+Run in terminal:  node bamazonCustomer.js
 
 ### Technologies:
 
