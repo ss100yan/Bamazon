@@ -38,11 +38,11 @@ var con = mysql.createConnection({
   
   con.connect(function(err) {
     if (err) throw err;
-    console.log("Connected!");
+    // console.log("Connected!");
         con.query("SELECT * FROM products ", function (err, result, fields) {
         if (err) throw err;
 
-        console.log('Bamazon Inventory: ');
+        console.log('Bamazon.com Inventory: ');
         console.log('...................\n');
     
         var Inventory = '';
@@ -73,7 +73,7 @@ var con = mysql.createConnection({
                  //....avelabiliti check function.....
                  
                 
-                 console.log(`We have only ${curenQuantity} in stock`);
+                //  console.log(`We have only ${curenQuantity} in stock`);
                 
                  
                  if (ItemQuantity<=curenQuantity){
@@ -84,11 +84,19 @@ var con = mysql.createConnection({
           if (err) throw err;
           // console.log(result.affectedRows + " record(s) updated");
 
-          console.log('\nOrder receipt:');
-          console.log(JSON.stringify(answers, null, '  '));
-          console.log("Thank you for shopping with Bamazon !!!");
+         
+         
+
+          
         });
-        
+               console.log('\n.....................................');
+               console.log('\nOrder receipt:');
+               console.log(JSON.stringify(answers, null, '  '));
+               console.log(`\n....... ${result[ItemID-1].product_name} .......`);
+               console.log(`\nTotal coast: ${result[ItemID-1].price} USD + Tax and delivery fee.`);
+               console.log('\n.....................................');
+               console.log("Thank you for shopping with Bamazon !!!");
+               console.log("Questions abou your purchase: 1-800-Bamazon or www.Bamazon.com/support");
         };
 
         });
