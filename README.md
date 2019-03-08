@@ -1,12 +1,13 @@
 # Bamazon
 
 ## Overview
-Amazon-like storefront.
+Amazon-like storefront built with MySQL and Node.js that takes in customers orders and depletes stock from the stores Inventory.
+
 Video of the functionlity of the app is provided in the the GIF folder.
 
 ## Gettting Started:
-
-Run in terminal:  node bamazonCustomer.js
+* npm install
+* Run in terminal:  node bamazonCustomer.js
 
 ### Technologies:
 
@@ -19,4 +20,5 @@ Node packages:
 * Mysql
 * Inquirer
 
-Creator: Stoyan Shivarov
+### Creator: 
+   Stoyan Shivarov
