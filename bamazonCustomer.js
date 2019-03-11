@@ -42,7 +42,7 @@ var con = mysql.createConnection({
   con.connect(function(err) {
     if (err) throw err;
     // console.log("Connected!");
-        con.query("SELECT * FROM products ", function (err, result, fields) {
+        con.query("SELECT * FROM products ", function (err, res, fields) {
         if (err) throw err;
 
 //.......Displaying the Bamazon products, ID's and prices.........................
@@ -51,12 +51,9 @@ var con = mysql.createConnection({
         console.log('...................\n');
     
         var Inventory = '';
-        for (var i = 0; i < result.length; i++) {
-          Inventory = '';
-          Inventory += 'Product ID: ' + result[i].id + '  //  ';
-          Inventory += 'Product Name: ' + result[i].product_name + '  //  ';
-          Inventory += 'Price: $' + result[i].price + '\n';
-    
+        for (var i = 0; i < res.length; i++) {
+          console.log("ID: " + res[i].id + " | " + "Product: " + res[i].product_name + " | " + "Price: " + res[i].price + " | " + "QTY: " + res[i].stock_quantity);
+          console.log('--------------------------------------------------------------------------------------------------')
           console.log(Inventory);
         }
     
@@ -74,7 +71,7 @@ var con = mysql.createConnection({
 
                  var ItemID = answers.ID
                  var ItemQuantity = answers.Quantity;
-                 var curenQuantity = result[ItemID-1].stock_quantity;
+                 var curenQuantity = res[ItemID-1].stock_quantity;
                  var UpdatedItemQuantity = curenQuantity -ItemQuantity;
 
         //....availability check .......................................
@@ -84,7 +81,7 @@ var con = mysql.createConnection({
       //.................MYSQL update..............................................
 
         var sql = `UPDATE products SET stock_quantity =${UpdatedItemQuantity} WHERE id =${ItemID}`;
-        con.query(sql, function (err, result) {
+        con.query(sql, function (err, res) {
           if (err) throw err;
           // console.log(result.affectedRows + " record(s) updated");
 
@@ -96,8 +93,8 @@ var con = mysql.createConnection({
                console.log('\n.....................................');
                console.log('\nOrder receipt:');
                console.log(JSON.stringify(answers, null, '  '));
-               console.log(`\n....... ${result[ItemID-1].product_name} .......`);
-               console.log(`\nTotal coast: ${result[ItemID-1].price} USD + Tax and delivery fee.`);
+               console.log(`\n....... ${res[ItemID-1].product_name} .......`);
+               console.log(`\nTotal coast: ${res[ItemID-1].price} USD + Tax and delivery fee.`);
                console.log('\n.....................................');
                console.log("Thank you for shopping with Bamazon !!!");
                console.log("Questions abou your purchase: 1-800-Bamazon or www.Bamazon.com/support");

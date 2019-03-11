@@ -121,44 +121,42 @@ var connection = mysql.createConnection({
         });
       }
       
-      //allows manager to add a completely new product to store
+      //...............................new product.............................
       function addNewProduct(){
-       
-       //ask user to fill in all necessary information to fill columns in table
-
+              
     inquirer.prompt([{
 
       type: "input",
-      name: "inputName",
-      message: "Please enter the item name of the new product.",
+      name: "Name",
+      message: "Enter the item name.",
   },
   {
       type: "input",
-      name: "inputDepartment",
-      message: "Please enter which department name of which the new product belongs.",
+      name: "Department",
+      message: "Enter department name.",
   },
   {
       type: "input",
-      name: "inputPrice",
-      message: "Please enter the price of the new product (0.00).",
+      name: "Price",
+      message: "Enter the price of the new product.",
   },
   {
       type: "input",
-      name: "inputStock",
-      message: "Please enter the stock quantity of the new product.",
+      name: "Stock",
+      message: "Enter the stock quantity of the new product.",
   }
 
-]).then(function(managerNew) {
+]).then(function(New) {
   console.log("---------------------------------------------------------------------\n");
-  console.log(`The new  product  ${managerNew.inputName} was added to the inventory database`);
+  console.log(`The new  product  ${New.Name} was added to the inventory database`);
   console.log("---------------------------------------------------------------------\n");
-//connect to database, insert column data with input from user
+
 
 connection.query("INSERT INTO products SET ?", {
-  product_name: managerNew.inputName,
-  department_name: managerNew.inputDepartment,
-  price: managerNew.inputPrice,
-  stock_quantity: managerNew.inputStock
+  product_name: New.Name,
+  department_name: New.Department,
+  price: New.Price,
+  stock_quantity: New.Stock
 }, function(err, res) {});
 start();
 });
